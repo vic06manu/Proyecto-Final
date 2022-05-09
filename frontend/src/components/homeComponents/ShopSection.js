@@ -22,13 +22,12 @@ const ShopSection = () => {
           <div className="row">
             <div className="col-lg-12 col-md-12 article">
               <div className="shopcontainer row">
-                {
-                  loading ? (
+                {loading ? (
                     <div className="mb-5">
                       <Loading/>
                     </div>
                   ) : error ? (
-                    <Message variant="alert_danger">{error}</Message>
+                    <Message variant="alert-danger">{error}</Message>
                   ):(
                     <>
                       {products.map((product) => (

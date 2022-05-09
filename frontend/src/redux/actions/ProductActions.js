@@ -15,4 +15,4 @@ export const listProduct = () => async(dispatch) => {
             : error.message,
         });
     }
-}
+};
