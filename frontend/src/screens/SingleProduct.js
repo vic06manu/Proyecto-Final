@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import Header from "./../components/Header";
 import Rating from "../components/homeComponents/Rating";
 import { Link } from "react-router-dom";
@@ -7,16 +7,21 @@ import {listProductDetails} from "../redux/actions/ProductActions";
 import Loading from "../components/LoadingError/Loading";
 import Message from "../components/LoadingError/Error";
 
-const SingleProduct = ({ match }) => {
-    const productId = match.params.id;
-    const dispatch = useDispatch();
+const SingleProduct = ({ history, match }) => {
+  const [qty,setQty] = useState(1);
+  const productId = match.params.id;
+  const dispatch = useDispatch();
 
-    const producDetails = useSelector((state) => state.productDetails);
-    const {loading,error,product} = producDetails;
+  const producDetails = useSelector((state) => state.productDetails);
+  const {loading,error,product} = producDetails;
 
-    useEffect(() => {
-      dispatch(listProductDetails(productId));
-    }, [dispatch,productId]);
+  useEffect(() => {
+    dispatch(listProductDetails(productId));
+  }, [dispatch,productId]);
+  const AddToCartHandle = (e) =>{
+    e.preventDefault();
+    history.push(`/cart/${productId}?qty=${qty}`);
+  }
   return (
     <>
       <Header />
@@ -74,7 +79,7 @@ const SingleProduct = ({ match }) => {
                               ))}
                             </select>
                           </div>
-                          <button className="round-black-btn">Add To Cart</button>
+                          <button onClick={AddToCartHandle} className="round-black-btn">Add To Cart</button>
                         </>
                       ) : null}
                     </div>
