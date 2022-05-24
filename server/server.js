@@ -4,6 +4,7 @@ import connectDatabase from './config/MongoDb.js';
 import ImportData from './DataImport.js';
 import productRoute from './routes/ProductRoutes.js';
 import { errorHandler, notFound } from "./middleware/error.js";
+import userRouter from "./routes/UserRoutes.js";
 
 dotenv.config();
 connectDatabase();
