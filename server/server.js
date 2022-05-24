@@ -8,10 +8,12 @@ import { errorHandler, notFound } from "./middleware/error.js";
 dotenv.config();
 connectDatabase();
 const app = express();
+app.use(express.json());
 
 //API
 app.use("/api/import", ImportData);
 app.use("/api/products", productRoute);
+app.use("/api/users", userRouter);
 
 //Error handling
 app.use(notFound);
